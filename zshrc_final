@@ -1,0 +1,121 @@
+# ==============================
+# Zsh + Oh-My-Zsh + Powerlevel10k - Configuração Otimizada
+# ==============================
+
+# Instant prompt do Powerlevel10k
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Caminho do Oh-My-Zsh
+export ZSH="$HOME/.oh-my-zsh"
+
+# Tema Powerlevel10k
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Plugins
+plugins=(
+  git
+  docker
+  docker-compose
+  sudo
+  history-substring-search
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+# Carregar Oh-My-Zsh
+source $ZSH/oh-my-zsh.sh
+
+# ==============================
+# Configurações Gerais
+# ==============================
+
+# Histórico de comandos maior e compartilhado entre terminais
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt SHARE_HISTORY
+
+# Autocompletar
+autoload -Uz compinit && compinit
+
+# Cache de completions (melhora desempenho)
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.zcompcache
+
+# Sugestões inteligentes do histórico
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+
+# ==============================
+# Aliases de Produtividade
+# ==============================
+
+# Git
+alias gs='git status'
+alias gp='git pull'
+alias gpp='git pull && git push'
+alias gc='git commit -m'
+alias ga='git add .'
+
+# Docker
+alias dps='docker ps'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dcb='docker compose build'
+alias dlogs='docker compose logs -f'
+
+# Sistema
+alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+alias cls='clear'
+alias rm='rm -i'
+
+# Cores nativas
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias diff='diff --color=auto'
+alias ip='ip -c'
+
+# ==============================
+# Integração com grc (colorização)
+# ==============================
+
+if command -v grc &>/dev/null; then
+    # Comandos de sistema e rede
+    alias df='grc df -h'
+    alias du='grc du -h'
+    alias ping='grc ping'
+    alias netstat='grc netstat'
+    alias traceroute='grc traceroute'
+    alias dig='grc dig'
+    alias mount='grc mount'
+    alias ps='grc ps'
+    alias ifconfig='grc ifconfig'
+    alias iptables='grc iptables'
+    alias nmap='grc nmap'
+    alias tcpdump='grc tcpdump -tttt'
+    alias mtr='grc mtr'
+
+    # Logs e hardware
+    alias uptime='grc uptime'
+    alias dmesg='grc dmesg'
+    alias blkid='grc blkid'
+    alias lsblk='grc lsblk'
+    alias lspci='grc lspci'
+    alias lsusb='grc lsusb'
+    alias journalctl='grc journalctl'
+fi
+
+# ==============================
+# Powerlevel10k Config
+# ==============================
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Syntax Highlighting deve ser carregado por último
+if [ -f "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
