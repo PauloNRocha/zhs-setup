@@ -2,6 +2,12 @@
 # Zsh + Oh-My-Zsh + Powerlevel10k - Configuração Otimizada
 # ==============================
 
+# Abort early if not running under Zsh (prevents errors when sourced from Bash)
+if [ -z "$ZSH_VERSION" ]; then
+  echo "Este arquivo é de configuração do Zsh. Abra um shell Zsh com 'zsh' ou defina-o como padrão: chsh -s \"$(command -v zsh)\"."
+  return 0 2>/dev/null || exit 0
+fi
+
 # Instant prompt do Powerlevel10k
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"

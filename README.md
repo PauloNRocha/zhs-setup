@@ -100,12 +100,19 @@ Opções:
 Após finalizar:
 
 ```bash
-# torne o Zsh seu shell padrão (se necessário)
+# defina o Zsh como shell padrão (se necessário)
 chsh -s "$(command -v zsh)"
 
-# reabra o terminal ou aplique imediatamente
+# feche e reabra o terminal (recomendado)
+# ou, se ainda estiver no Bash, entre no Zsh manualmente:
+zsh
+
+# já dentro do Zsh, aplique as mudanças
 source ~/.zshrc
 ```
+
+Nota:
+- Não rode `source ~/.zshrc` dentro do Bash. Abra um shell Zsh (rodando `zsh` ou reabrindo o terminal após `chsh`).
 
 ---
 
