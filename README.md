@@ -128,6 +128,34 @@ p10k configure
 
 ---
 
+## 🧹 Desinstalação
+
+Execute o desinstalador:
+
+```bash
+chmod +x uninstall_zsh.sh
+./uninstall_zsh.sh
+```
+
+O script pergunta qual caminho seguir:
+- **Modo revert** – restaura o `~/.zshrc` anterior (mantém Oh-My-Zsh, tema e plugins instalados).
+- **Modo full** – remove Oh-My-Zsh, Powerlevel10k e faz rollback para o Bash padrão.
+
+Para automatizar, passe `--mode` e `--yes`:
+
+```bash
+./uninstall_zsh.sh --mode revert --yes
+./uninstall_zsh.sh --mode full --yes --remove-packages
+```
+
+Opções adicionais:
+
+- `--remove-packages` — (modo full) remove zsh, grc, fonts-powerline.
+- `--remove-all-packages` — (modo full) também remove `git`, `curl`, `wget`.
+- `-v, --verbose` — mostra a saída completa dos comandos.
+
+O desinstalador sempre cria um backup de segurança (`~/.zshrc.uninstall.bak`) antes de qualquer mudança.
+
 ## 🧠 Por Que Criar Este Projeto?
 
 > **Motivação Pessoal:**  
