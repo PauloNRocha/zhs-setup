@@ -155,6 +155,7 @@ Opções adicionais:
 - `-v, --verbose` — mostra a saída completa dos comandos.
 
 O desinstalador sempre cria um backup de segurança (`~/.zshrc.uninstall.bak`) antes de qualquer mudança.
+- No modo `full`, se o `~/.zshrc` restaurado ainda referenciar o Oh-My-Zsh, ele é substituído por uma versão mínima sem dependências externas.
 
 ## 🧠 Por Que Criar Este Projeto?
 
