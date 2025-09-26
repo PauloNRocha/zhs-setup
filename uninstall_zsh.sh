@@ -212,6 +212,14 @@ else
 fi
 
 if [[ "$MODE" == "full" ]]; then
+  if [ -f "$HOME/.zshrc" ] && grep -qiE 'oh-my-zsh|powerlevel10k' "$HOME/.zshrc"; then
+    log_warn "O ~/.zshrc atual ainda possui referências ao Oh-My-Zsh. Criando configuração básica."
+    run_command "🧼 Substituindo ~/.zshrc por uma versão mínima..." "~/.zshrc redefinido sem Oh-My-Zsh." \
+      bash -lc 'printf "%s\n" "# ~/.zshrc redefinido pelo uninstall_zsh.sh (modo full)" \
+        "# Adicione aqui suas configurações personalizadas de Zsh." \
+        "" > "$HOME/.zshrc"'
+  fi
+
   run_command "🧹 Removendo ~/.p10k.zsh..." "Arquivo ~/.p10k.zsh removido (se existia)." \
     bash -lc 'rm -f "$HOME/.p10k.zsh"'
 
